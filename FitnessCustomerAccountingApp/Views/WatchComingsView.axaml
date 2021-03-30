@@ -1,0 +1,62 @@
+<rxui:ReactiveUserControl
+			 x:TypeArguments="vm:WatchComingsViewModel"
+			 xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:converter="using:FitnessCustomerAccountingApp.Converters"
+			 xmlns:vm="using:FitnessCustomerAccountingApp.Core"
+			 xmlns:rxui="http://reactiveui.net"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FitnessCustomerAccountingApp.WatchComingsView">
+	<rxui:ReactiveUserControl.Resources>
+		<converter:StringToDateTimeConverter x:Key="StringToDtConverter"/>
+	</rxui:ReactiveUserControl.Resources>
+	<DataGrid Items="{x:Static vm:DB.Comings}">
+		<DataGrid.Columns>
+			<DataGridTemplateColumn Header="Зал"  Width="Auto" >
+				<DataGridTemplateColumn.CellTemplate>
+					<DataTemplate>
+						<ComboBox Margin="10"
+								  Items="{Binding Halls}" 
+								  SelectedItem="{Binding Hall}" />
+					</DataTemplate>
+				</DataGridTemplateColumn.CellTemplate>
+			</DataGridTemplateColumn>
+			<DataGridTemplateColumn  Header="Дата"  Width="Auto" >
+				<DataGridTemplateColumn.CellTemplate>
+					<DataTemplate>
+						<DatePicker 
+							Margin="10" 
+							SelectedDate="{Binding Dt,Converter={StaticResource StringToDtConverter},
+							Mode=TwoWay }" />
+					</DataTemplate>
+				</DataGridTemplateColumn.CellTemplate>
+			</DataGridTemplateColumn>
+			<DataGridTemplateColumn Header="Время"  Width="Auto" >
+				<DataGridTemplateColumn.CellTemplate>
+					<DataTemplate>
+						<TimePicker  
+							Margin="10"
+							SelectedTime="{Binding Time,Mode=TwoWay ,
+							Converter={StaticResource StringToDtConverter},
+							ConverterParameter='Time'}"/>
+					</DataTemplate>
+				</DataGridTemplateColumn.CellTemplate>
+			</DataGridTemplateColumn>
+			
+			<DataGridTemplateColumn Header="Клиент"  Width="Auto" >
+				<DataGridTemplateColumn.CellTemplate>
+					<DataTemplate>
+						<AutoCompleteBox Items="{Binding Clients}"
+							  MinimumPrefixLength="0" ValueMemberBinding="{Binding }"
+							  IsTextCompletionEnabled="True"
+							  SelectedItem="{Binding Client}"/>
+					</DataTemplate>
+				</DataGridTemplateColumn.CellTemplate>
+			</DataGridTemplateColumn>
+			<DataGridTextColumn Header="Комментарий" Binding="{Binding Comment, Mode=TwoWay}"/>
+		</DataGrid.Columns>
+
+	</DataGrid>
+</rxui:ReactiveUserControl>

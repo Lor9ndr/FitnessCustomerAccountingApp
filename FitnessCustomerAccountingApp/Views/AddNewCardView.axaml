@@ -1,0 +1,43 @@
+<rxui:ReactiveUserControl
+			 x:TypeArguments="vm:AddNewCardViewModel"
+			 xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:vm ="using:FitnessCustomerAccountingApp.Core"
+			 xmlns:local ="using:FitnessCustomerAccountingApp"
+			 xmlns:converter="using:FitnessCustomerAccountingApp.Converters"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:rxui="http://reactiveui.net"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FitnessCustomerAccountingApp.AddNewCardView">
+	<rxui:ReactiveUserControl.Resources>
+		<converter:StringToDateTimeConverter x:Key="StringToDtConverter"/>
+	</rxui:ReactiveUserControl.Resources>
+	<Border>
+		<StackPanel   Spacing="10">
+			<Label Content="Название карты"/>
+			<TextBox Watermark="Название карты" Text="{Binding Name, Mode=TwoWay}" />
+
+			<Label Content="Активна?"/>
+			<CheckBox Content="Активна?" IsChecked="{Binding IsActive, Mode=TwoWay}" />
+
+			<Label Content="Скидка"/>
+			<TextBox Watermark="Скидка" Text="{Binding Discount, Mode=TwoWay}" />
+
+			<Label Content="Кол-во дней"/>
+			<TextBox Watermark="Кол-во дней" Text="{Binding CountOfDays, Mode=TwoWay}"/>
+
+			<Label Content="Активна с "/>
+			<TimePicker SelectedTime="{Binding StartOfActivity, Mode=TwoWay }"/>
+
+			<Label Content="до"/>
+			<TimePicker SelectedTime="{Binding EndOfActivity, Mode=TwoWay}"/>
+
+
+			<Label Content="Стоимость без скидки"/>
+			<TextBox Watermark="Стоимость без скидки" Text="{Binding Price, Mode=TwoWay}"/>
+
+			<Button Content="Добавить" Command="{Binding AddNewCardCommand}"/>
+		</StackPanel>
+	</Border>
+</rxui:ReactiveUserControl>

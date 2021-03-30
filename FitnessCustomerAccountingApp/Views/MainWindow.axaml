@@ -1,0 +1,50 @@
+<reactiveUi:ReactiveWindow
+		x:TypeArguments="vm:MainViewModel"
+		xmlns:reactiveUi="http://reactiveui.net"
+		xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="using:FitnessCustomerAccountingApp"
+		xmlns:vm="using:FitnessCustomerAccountingApp.Core"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		x:Class="FitnessCustomerAccountingApp.MainWindow"
+		Icon="/Assets/avalonia-logo.ico"
+		Title="FitnessCustomerAccountingApp">
+	
+	<Grid >
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<!--Left menu -->
+			<StackPanel>
+				<Button Command="{Binding GoToAddClientViewCommand}" Content="Добавить клиента" />
+				<Button Command="{Binding GoToAddNewCardCommand}" Content="Добавить карту" />
+				<Button Command="{Binding GoToAddNewComingCommand}" Content="Добавить посещение" />
+				<Button Command="{Binding GoToAddNewHallCommand}" Content="Добавить зал" />
+				<Button Command="{Binding GoToWatchComingsViewCommand}" Content="Посмотреть посещения" />
+				<Button Command="{Binding GoToWatchClientsViewCommand}" Content="Посмотр клиентов" />
+				<Button Command="{Binding GoToWatchCardsViewCommand}" Content="Посмотреть карты" />
+			</StackPanel>
+		</Grid>
+
+		<!-- Элемент управления, наблюдающий за RoutingState, 
+			 встраивающий подходящее View текущей ViewModel  -->
+		<reactiveUi:RoutedViewHost Grid.Column="1" Grid.Row="1" Router="{Binding Router}" >
+			<reactiveUi:RoutedViewHost.DefaultContent>
+				<vm:AddNewClientViewModel/>
+			</reactiveUi:RoutedViewHost.DefaultContent>
+			<reactiveUi:RoutedViewHost.ViewLocator>
+				<local:ConventionalViewLocator/>
+			</reactiveUi:RoutedViewHost.ViewLocator>
+		</reactiveUi:RoutedViewHost>
+
+	</Grid>
+
+</reactiveUi:ReactiveWindow>

@@ -1,0 +1,36 @@
+<rxui:ReactiveUserControl
+			 x:TypeArguments="vm:CreateComingViewModel"
+			 xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:converter="using:FitnessCustomerAccountingApp.Converters"
+			 xmlns:vm="using:FitnessCustomerAccountingApp.Core"
+			 xmlns:rxui="http://reactiveui.net"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FitnessCustomerAccountingApp.CreateComingView">
+	<rxui:ReactiveUserControl.Resources>
+		<converter:StringToDateTimeConverter x:Key="StringToDtConverter"/>
+	</rxui:ReactiveUserControl.Resources>
+	<Border>
+		<StackPanel Grid.Column="0" Spacing="10">
+			<Label Content="Выберите зал"/>
+			<ComboBox Items="{x:Static vm:DB.Halls}" SelectedItem="{Binding Hall}"/>
+			<Label Content="Введите имя клиента"/>
+			<AutoCompleteBox  Items="{Binding Clients}"  
+							  MinimumPrefixLength="0" 
+							  ValueMemberBinding="{Binding }" 
+							  IsTextCompletionEnabled="True" 
+							  SelectedItem="{Binding Client}"/>
+			<Label Content="Выберите дату"/>
+			<DatePicker  SelectedDate="{Binding Dt, Converter={StaticResource StringToDtConverter},Mode=TwoWay}"/>
+			<Label Content="Выберите время"/>
+			<TimePicker  SelectedTime="{Binding Time}"/>
+			<Label Content="Введите комментарий"/>
+			<TextBox Text="{Binding Comment}"/>
+
+			<Button Content="Добавить посещение" Command="{Binding AddNewComingCommand}" />
+			
+		</StackPanel>
+	</Border>
+</rxui:ReactiveUserControl>

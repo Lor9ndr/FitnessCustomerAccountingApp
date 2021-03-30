@@ -1,0 +1,67 @@
+<rxui:ReactiveUserControl
+			 x:TypeArguments="vm:WatchCardsViewModel"
+			 xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:vm ="using:FitnessCustomerAccountingApp.Core"
+			 xmlns:local ="using:FitnessCustomerAccountingApp"
+			 xmlns:converter="using:FitnessCustomerAccountingApp.Converters"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:rxui="http://reactiveui.net"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FitnessCustomerAccountingApp.WatchCardsView">
+	<rxui:ReactiveUserControl.Resources>
+		<converter:StringToDateTimeConverter x:Key="StringToDtConverter"/>
+	</rxui:ReactiveUserControl.Resources>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
+		<DataGrid Items="{Binding Cards}" SelectionMode="Single"  CanUserReorderColumns="True" CanUserResizeColumns="True" >
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Название карты" 
+									Binding="{Binding Name}" 
+									Width="2*" />
+				<DataGridTextColumn Header="Идентификатор" 
+									Binding="{Binding Id}" 
+									Width="2*" />
+				<DataGridCheckBoxColumn Header="Активна?" 
+									Binding="{Binding IsActive}"
+									Width="2*" />
+				
+				 <DataGridTextColumn Header="Скидка " 
+									Binding="{Binding Discount}"
+									Width="2*" />
+				
+				 <DataGridTextColumn Header="Количество актинвых дней" 
+									Binding="{Binding CountOfDays}"
+									Width="2*" />
+				<DataGridTextColumn Header="Цена без скидки "
+									Binding="{Binding Price,Mode=TwoWay }"
+									Width="2*" />
+
+				<DataGridTextColumn Header="Цена со скидкой"
+									Binding="{Binding PriceWithDiscount,Mode=OneWay}"
+									Width="2*" />
+
+
+				<DataGridTemplateColumn Header="Активна с"  Width="Auto" >
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TimePicker SelectedTime="{Binding StartOfActivity, Mode=TwoWay }"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn Header="Активна до "  Width="Auto" >
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TimePicker SelectedTime="{Binding EndOfActivity, Mode=TwoWay}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</rxui:ReactiveUserControl>

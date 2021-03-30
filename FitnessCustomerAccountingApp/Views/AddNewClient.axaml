@@ -1,0 +1,37 @@
+<rxui:ReactiveUserControl 
+			 x:TypeArguments="vm:AddnewClientViewModel"
+			 xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:converter="using:FitnessCustomerAccountingApp.Converters"
+			 xmlns:vm="using:FitnessCustomerAccountingApp.Core"
+			 xmlns:rxui="http://reactiveui.net"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FitnessCustomerAccountingApp.AddNewClientView">
+	<rxui:ReactiveUserControl.Resources>
+		<converter:StringToDateTimeConverter x:Key="StringToDtConverter"/>
+	</rxui:ReactiveUserControl.Resources>
+	<Border>
+		<StackPanel Grid.Column="0" Spacing="10">
+			<Label Content="Имя"/>
+			<TextBox Watermark="Имя" Text="{Binding Name, Mode=TwoWay}" />
+			<Label Content="Фамилия"/>
+			<TextBox Watermark="Фамилия" Text="{Binding Surname, Mode=TwoWay}" />
+			<Label Content="Почта"/>
+			<TextBox Watermark="Почта" Text="{Binding Email, Mode=TwoWay}" />
+			<Label Content="Адрес"/>
+			<TextBox Watermark="Адрес" Text="{Binding Address, Mode=TwoWay}"/>
+			<Label Content="Паспорт"/>
+			<TextBox Watermark="Паспорт" Text="{Binding Passport, Mode=TwoWay}"/>
+			<Label Content="Телефон"/>
+			<TextBox Watermark="Телефон" Text="{Binding Phone, Mode=TwoWay}"/>
+			<DatePicker Header="Дата рождения" 
+						SelectedDate="{Binding BirthDay, Converter={StaticResource StringToDtConverter},Mode=TwoWay}" />
+			<Label Content="Тип карты"/>
+			<ComboBox Items="{x:Static vm:DB.Cards}" SelectedItem="{Binding Card}"  PlaceholderText="Тип карты"/>
+			<Button Content="Добавить" Command="{Binding AddNewClientCommand}"/>
+		</StackPanel>
+	</Border>
+
+</rxui:ReactiveUserControl>

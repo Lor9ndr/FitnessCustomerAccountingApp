@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
+    <PackageReference Include="Citrus.Avalonia" Version="1.4.3" />
+    <PackageReference Include="ReactiveUI" Version="13.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FitnessCustomerAccountingApp.Core\FitnessCustomerAccountingApp.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\CreateComingView.axaml.cs">
+      <DependentUpon>CreateComingView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\WatchCardsView.axaml.cs">
+      <DependentUpon>WatchCardsView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
+</Project>
